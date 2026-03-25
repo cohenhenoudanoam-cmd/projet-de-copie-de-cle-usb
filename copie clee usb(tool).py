@@ -26,10 +26,14 @@ def copier_fichiers_cle_usb(source, destination):
             os.makedirs(dest_dir)
         for file in files:
             src_file = os.path.join(root, file)
+            road_file = os.path.abspath(src_file)
             dest_file = os.path.join(dest_dir, file)
             try:
                 shutil.copy2(src_file, dest_file)
                 print(f"Fichier {src_file} copié avec succès dans {dest_file}")
+                print(f"le chemin du fichier en cours de copie est : {road_file}")
+                shutil.make_archive(dest_file, 'zip', dest_dir)
+                print(f"Fichier {dest_file} compressé en {dest_file}.zip")
             except Exception as e:
                 print(f"Erreur lors de la copie de {src_file} : {e}")
 
